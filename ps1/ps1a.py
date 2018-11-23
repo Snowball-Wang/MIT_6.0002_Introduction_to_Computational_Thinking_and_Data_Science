@@ -145,11 +145,6 @@ def brute_force_cow_transport(cows,limit=10):
     return result[0]
 
 
-
-
-
-
-
 # Problem 4
 def compare_cow_transport_algorithms():
     """
@@ -164,5 +159,26 @@ def compare_cow_transport_algorithms():
     Returns:
     Does not return anything.
     """
-    # TODO: Your code here
-    pass
+    # Load the cows dictionary
+    filename = 'ps1_cow_data.txt'
+    cows_dict = load_cows(filename)
+    limit = 10
+
+    # Calculate the time for greedy algorithm
+    start = time.time()
+    result = greedy_cow_transport(cows_dict, limit)
+    end = time.time()
+    greedy_time = end - start
+
+
+    # Calculate the time for brute force algorithm
+    start = time.time()
+    result = brute_force_cow_transport(cows_dict, limit)
+    end = time.time()
+    brute_time = end - start
+
+
+    print("Run time for greedy algorithm is: ", greedy_time)
+    print("Run time for brute force algorithm is: ", brute_time)
+
+
