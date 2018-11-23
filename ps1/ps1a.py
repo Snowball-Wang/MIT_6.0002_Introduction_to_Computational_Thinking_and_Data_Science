@@ -113,8 +113,42 @@ def brute_force_cow_transport(cows,limit=10):
     transported on a particular trip and the overall list containing all the
     trips
     """
-    # TODO: Your code here
-    pass
+    # Make a copy for cows dict
+    cows_copy = cows.copy()
+    # The list that contains all trips
+    trips_list = []
+
+    # Set flag to mark whether it is over the weight limit
+    flag = False
+    for partition in get_partitions(cows_copy):
+        for list_elem in partition:
+            # Get the total weight for each list in the partition
+            total_weight = sum([cows_copy[k] for k in list_elem])
+            if total_weight > limit:
+                flag = False
+                break
+            else:
+                flag = True
+
+        # If flag is true, the partition satisfies the condition
+        if flag:
+            trips_list.append(partition)
+
+    # Get the least trips for transport
+    min_len = len(cows_copy)
+    for k in trips_list:
+        if len(k) < min_len:
+            min_len = len(k)
+
+    # Get all lists whose length is equal to minimal length
+    result = [k for k in trips_list if len(k) == min_len]
+    return result[0]
+
+
+
+
+
+
 
 # Problem 4
 def compare_cow_transport_algorithms():
