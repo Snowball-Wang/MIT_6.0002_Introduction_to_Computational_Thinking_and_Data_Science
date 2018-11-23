@@ -30,10 +30,10 @@ def load_cows(filename):
         for line in f:
             # Get rid of '\n' in each line
             line = line.strip('\n')
-
             # Get cow name and weight and store them in the dictionary
             key, value = line.split(',')
-            cows_dict[key] = value
+            # Transfer the str type of value into int type
+            cows_dict[key] = int(value)
 
     return cows_dict
 
@@ -61,8 +61,35 @@ def greedy_cow_transport(cows,limit=10):
     transported on a particular trip and the overall list containing all the
     trips
     """
-    # TODO: Your code here
-    pass
+    # Make a copy for cows dict
+    cows_copy = cows.copy()
+    # The list that contains all trips
+    trip_list = []
+
+    # Judge whether the dict is empty, if not, go on
+    while len(cows_copy) != 0:
+        # The list for one trip
+        trip = []
+        left = limit
+        while left > 0:
+            # Get all weights that satisfy the condition that there are left space
+            weight_list = [v for k, v in cows_copy.items() if v <= left]
+            # If weight_list is not empty, go on
+            if weight_list:
+                max_weight = max(weight_list)
+                # There are probably more than one cows satisfy the max_weight, just pick up the first one
+                cows = str([k for k,v in cows_copy.items() if v == max_weight][0])
+                trip.append(cows)
+                del cows_copy[cows]
+                # Update the left space
+                left = left - max_weight
+            else:
+                break
+        trip_list.append(trip)
+
+    return trip_list
+
+
 
 # Problem 3
 def brute_force_cow_transport(cows,limit=10):
