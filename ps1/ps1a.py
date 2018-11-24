@@ -1,8 +1,11 @@
-###########################
-# 6.0002 Problem Set 1a: Space Cows
-# Name:
-# Collaborators:
-# Time:
+#!/usr/bin/env python3
+#*******************************************************
+#       Filename: ps1a.py
+#       Author: Snowball Wang
+#       Mail: wjq1996@mail.ustc.edu.cn
+#       Description: Solution to Problem A
+#       Created on: 2018-11-24 11:55:48
+#*******************************************************
 
 from ps1_partition import get_partitions
 import time

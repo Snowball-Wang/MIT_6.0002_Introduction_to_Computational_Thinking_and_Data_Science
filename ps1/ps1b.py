@@ -1,10 +1,12 @@
-###########################
-# 6.0002 Problem Set 1b: Space Change
-# Name:
-# Collaborators:
-# Time:
-# Author: charz, cdenise
-
+#!/usr/bin/env python3
+#*******************************************************
+#       Filename: ps1b.py
+#       Author: Snowball Wang
+#       Mail: wjq1996@mail.ustc.edu.cn
+#       Description: Solution to Problem B
+#       Created on: 2018-11-24 11:56:21
+#*******************************************************
+# Referenced: https://github.com/tuthang102/MIT-6.0002-Intro-to-Computational-Thinking-and-Data-Science/blob/master/PS1/ps1b.py
 #================================
 # Part B: Golden Eggs
 #================================
