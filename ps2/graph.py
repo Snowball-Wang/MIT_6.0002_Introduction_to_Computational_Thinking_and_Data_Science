@@ -1,8 +1,11 @@
-# 6.0002 Problem Set 5
-# Graph optimization
-# Name:
-# Collaborators:
-# Time:
+#!/usr/bin/env python3
+#*******************************************************
+#       Filename: graph.py
+#       Author: Snowball Wang
+#       Mail: wjq1996@mail.ustc.edu.cn
+#       Description: Solution to Problem 1
+#       Created on: 2018-11-27 17:21:58
+#*******************************************************
 
 import unittest
 

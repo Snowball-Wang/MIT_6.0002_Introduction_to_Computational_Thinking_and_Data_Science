@@ -1,9 +1,12 @@
-# 6.0002 Problem Set 5
-# Graph optimization
-# Name:
-# Collaborators:
-# Time:
-
+#!/usr/bin/env python3
+#*******************************************************
+#       Filename: ps2.py
+#       Author: Snowball Wang
+#       Mail: wjq1996@mail.ustc.edu.cn
+#       Description: Solutions to Problem 2 & 3
+#       Created on: 2018-11-27 17:22:37
+#*******************************************************
+# Referenced link: https://github.com/tuthang102/MIT-6.0002-Intro-to-Computational-Thinking-and-Data-Science/blob/master/PS2/ps2.py
 #
 # Finding shortest paths through MIT buildings
 #
