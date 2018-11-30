@@ -354,7 +354,9 @@ class FurnishedRoom(RectangularRoom):
         """
         Returns: an integer; the total number of tiles in the room that can be accessed.
         """
-        return self.width * self.height
+        # Remember to minus the furnished tiles
+        return self.width * self.height - len(self.furniture_tiles)
+
 
     def get_random_position(self):
         """
@@ -396,7 +398,14 @@ class StandardRobot(Robot):
         rotate once to a random new direction, and stay stationary) and clean the dirt on the tile
         by its given capacity.
         """
-        raise NotImplementedError
+        new_pos = self.get_robot_position().get_new_position(self.dir, self.speed)
+        if self.room.is_position_valid(new_pos):
+            self.room.clean_tile_at_position(new_pos, self.capacity)
+            self.set_robot_position(new_pos)
+        else:
+            self.set_robot_direction(round(360 * random.random(), 1))
+
+
 
 # Uncomment this line to see your implementation of StandardRobot in action!
 #test_robot_movement(StandardRobot, EmptyRoom)
