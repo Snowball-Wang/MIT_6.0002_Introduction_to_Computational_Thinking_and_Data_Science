@@ -1,7 +1,13 @@
-# Problem Set 4: Simulating the Spread of Disease and Bacteria Population Dynamics
-# Name:
-# Collaborators (Discussion):
-# Time:
+#!/usr/bin/env python3
+#*******************************************************
+#       Filename: ps4.py
+#       Author: Snowball Wang
+#       Mail: wjq1996@mail.ustc.edu.cn
+#       Description: Solution to Problem Set 4
+#       Created on: 2018-12-04 14:44:03
+#*******************************************************
+# Referenced Link: https://github.com/tuthang102/MIT-6.0002-Intro-to-Computational-Thinking-and-Data-Science/blob/master/PS4/ps4.py
+#
 
 import math
 import numpy as np
