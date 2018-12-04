@@ -660,10 +660,19 @@ total_pop, resistant_pop = simulation_with_antibiotic(num_bacteria=100,
 # Trends of Simulation A and Simulation B
 # Questions:
 # 1. What happens to the total population before introducing the antibiotic?
+# Answer: the total popualtion is increasing at a very fast speed and reach the limit around some time steps.
 #
 # 2. What happens to the resistant bacteria population before introducing the antibiotic?
+# Answer: the resistant bacteria population increases at a lower speed compared to the total population.
 #
-# 3. What happens to the total population after introducing the antibiotic
-#
+# 3. What happens to the total population after introducing the antibiotic?
+# Answer:
+# Simulation A: the total population drops at a drastic speed and  increases a little bit until reaching
+# the limit.
+# Simulation B: the total population drops at an obvious speed and converges to the zero.
+
 # 4. What happens to the resistant bacteria population after introducing the antibiotic?
-#
+# Simulation A: the resistant bacteria population is increasing and reaches the top soon. After the introduction
+# of antibiotics, the number increases slowly and converges to a number finally.
+# Simulation B: the resistant bacteria population drops at an obvious speed when introducing the anticiotic.
+# The trend for total population and resistant bacteria population are the same in both Simulation A and Simulation B.
