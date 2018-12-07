@@ -214,8 +214,30 @@ def evaluate_models_on_training(x, y, models):
     Returns:
         None
     """
-    # TODO
-    pass
+    for model in models:
+        pylab.figure()
+        pylab.plot(x, y, 'b.', label = 'Training data points')
+        pylab.xlabel('Years')
+        pylab.ylabel('Degrees Celsius')
+        degree = len(model) - 1
+        estYVal = pylab.polyval(model, x)
+        rSquare = r_squared(y, estYVal)
+        # if the model is linear
+        if len(model) == 2:
+            se_slope = se_over_slope(x, y, estYVal, model)
+            pylab.plot(x, estYVal, 'r-')
+            title = 'degree: ' + str(round(degree, 4)) + '\n' + 'R-square: ' + \
+                    str(round(rSquare, 4)) + '\n' + 'SE/slope: ' + str(round(se_slope, 4))
+            pylab.title(title)
+            pylab.show()
+        else:
+            pylab.plot(x, estYVal, 'r-')
+            title = 'degree: ' + str(round(degree, 4)) + '\n' + 'R-square: ' + \
+                    str(round(rSquare, 4))
+            pylab.title(title)
+            pylab.show()
+
+
 
 def gen_cities_avg(climate, multi_cities, years):
     """
@@ -315,10 +337,19 @@ def evaluate_models_on_testing(x, y, models):
 
 if __name__ == '__main__':
 
-    pass
 
     # Part A.4
-    # TODO: replace this line with your code
+    # Part A.4.I
+    climate = Climate('data.csv')
+    data_samples = []
+    for i in TRAINING_INTERVAL:
+        data_samples.append(climate.get_daily_temp('NEW YORK', 1, 10, i))
+    pylab.array(data_samples)
+    year = pylab.array(TRAINING_INTERVAL)
+    models = generate_models(year, data_samples, [1])
+    evaluate_models_on_training(year, data_samples, models)
+
+
 
     # Part B
     # TODO: replace this line with your code
