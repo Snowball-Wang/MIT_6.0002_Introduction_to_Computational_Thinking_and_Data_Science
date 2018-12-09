@@ -254,8 +254,19 @@ def gen_cities_avg(climate, multi_cities, years):
         this array corresponds to the average annual temperature over the given
         cities for a given year.
     """
-    # TODO
-    pass
+    # The first step is to calculate the average annual temperature for one city.
+    # Then get the average annual temperature for cities by dividing the number
+    # of cities. Remember to convert the list type to pylab.array type.
+    avg_annual_temp = []
+    for i in years:
+        avg_annual_temp_multi = []
+        for city in multi_cities:
+            avg_temp = climate.get_yearly_temp(city, i)
+            avg_annual_temp_multi.append(avg_temp.sum()/len(avg_temp))
+        avg_annual_temp_multi = pylab.array(avg_annual_temp_multi)
+        avg_annual_temp.append(avg_annual_temp_multi.sum()/len(avg_annual_temp_multi))
+
+    return pylab.array(avg_annual_temp)
 
 def moving_average(y, window_length):
     """
@@ -351,19 +362,24 @@ if __name__ == '__main__':
 #    evaluate_models_on_training(year, data_samples, models)
 
     # Part A.4.II
+#    climate = Climate('data.csv')
+#    data_samples = []
+#    # Traverse the training interval to get the average yearly temperature
+#    for i in TRAINING_INTERVAL:
+#        avg_temp = climate.get_yearly_temp('NEW YORK', i)
+#        data_samples.append(avg_temp.sum()/len(avg_temp))
+#    year = pylab.array(TRAINING_INTERVAL)
+#    models = generate_models(year, data_samples, [1])
+#    evaluate_models_on_training(year, data_samples, models)
+
+    # Part B
     climate = Climate('data.csv')
     data_samples = []
-    # Traverse the training interval to get the average yearly temperature
-    for i in TRAINING_INTERVAL:
-        avg_temp = climate.get_yearly_temp('NEW YORK', i)
-        data_samples.append(avg_temp.sum()/len(avg_temp))
+    data_samples = gen_cities_avg(climate, CITIES, TRAINING_INTERVAL)
     year = pylab.array(TRAINING_INTERVAL)
     models = generate_models(year, data_samples, [1])
     evaluate_models_on_training(year, data_samples, models)
 
-
-    # Part B
-    # TODO: replace this line with your code
 
     # Part C
     # TODO: replace this line with your code
@@ -373,3 +389,4 @@ if __name__ == '__main__':
 
     # Part E
     # TODO: replace this line with your code
+    pass
