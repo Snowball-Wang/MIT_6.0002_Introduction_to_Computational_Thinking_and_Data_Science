@@ -340,15 +340,26 @@ if __name__ == '__main__':
 
     # Part A.4
     # Part A.4.I
+#    climate = Climate('data.csv')
+#    data_samples = []
+#    # Traverse the training interval to get the daily temperature
+#    for i in TRAINING_INTERVAL:
+#        data_samples.append(climate.get_daily_temp('NEW YORK', 1, 10, i))
+#    pylab.array(data_samples)
+#    year = pylab.array(TRAINING_INTERVAL)
+#    models = generate_models(year, data_samples, [1])
+#    evaluate_models_on_training(year, data_samples, models)
+
+    # Part A.4.II
     climate = Climate('data.csv')
     data_samples = []
+    # Traverse the training interval to get the average yearly temperature
     for i in TRAINING_INTERVAL:
-        data_samples.append(climate.get_daily_temp('NEW YORK', 1, 10, i))
-    pylab.array(data_samples)
+        avg_temp = climate.get_yearly_temp('NEW YORK', i)
+        data_samples.append(avg_temp.sum()/len(avg_temp))
     year = pylab.array(TRAINING_INTERVAL)
     models = generate_models(year, data_samples, [1])
     evaluate_models_on_training(year, data_samples, models)
-
 
 
     # Part B
