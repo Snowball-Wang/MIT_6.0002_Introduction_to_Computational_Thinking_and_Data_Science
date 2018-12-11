@@ -223,7 +223,7 @@ def evaluate_models_on_training(x, y, models):
         estYVal = pylab.polyval(model, x)
         rSquare = r_squared(y, estYVal)
         # if the model is linear
-        if len(model) == 2:
+        if degree == 1:
             se_slope = se_over_slope(x, y, estYVal, model)
             pylab.plot(x, estYVal, 'r-')
             title = 'degree: ' + str(round(degree, 4)) + '\n' + 'R-square: ' + \
@@ -365,11 +365,11 @@ def evaluate_models_on_testing(x, y, models):
         pylab.xlabel('Years')
         pylab.ylabel('Degree Celsius')
         degree = len(model) - 1
-        estYVal = pylab.polyfit(model, x)
-        rmse = rmse(y, estYVal)
+        estYVal = pylab.polyval(model, x)
+        RMSE = rmse(y, estYVal)
         pylab.plot(x, estYVal, 'r-')
         title = 'degree: ' + str(degree) + '\n' + \
-                'RMSE: ' + str(round(rmse, 4))
+                'RMSE: ' + str(round(RMSE, 4))
         pylab.title(title)
         pylab.show()
 
@@ -428,7 +428,11 @@ if __name__ == '__main__':
     moving_avg = moving_average(data_samples, window_length)
     year = pylab.array(TRAINING_INTERVAL)
     models = generate_models(year, moving_avg, degrees)
-    evaluate_models_on_training(year, moving_avg, models)
+    #evaluate_models_on_training(year, moving_avg, models)
+    test_samples = gen_cities_avg(climate, CITIES, TESTING_INTERVAL)
+    test_moving_avg = moving_average(test_samples, window_length)
+    test_year = pylab.array(TESTING_INTERVAL)
+    evaluate_models_on_testing(test_year, test_moving_avg, models)
 
 
     # Part E
