@@ -258,10 +258,10 @@ def gen_cities_avg(climate, multi_cities, years):
     # Then get the average annual temperature for cities by dividing the number
     # of cities. Remember to convert the list type to pylab.array type.
     avg_annual_temp = []
-    for i in years:
+    for year in years:
         avg_annual_temp_multi = []
         for city in multi_cities:
-            avg_temp = climate.get_yearly_temp(city, i)
+            avg_temp = climate.get_yearly_temp(city, year)
             avg_annual_temp_multi.append(avg_temp.sum()/len(avg_temp))
         avg_annual_temp_multi = pylab.array(avg_annual_temp_multi)
         avg_annual_temp.append(avg_annual_temp_multi.sum()/len(avg_annual_temp_multi))
@@ -332,8 +332,36 @@ def gen_std_devs(climate, multi_cities, years):
         this array corresponds to the standard deviation of the average annual
         city temperatures for the given cities in a given year.
     """
-    # TODO
-    pass
+    # Explanation for some variable names
+    # std_devs_list: list that stores annual standard deviation
+    # annual_temp: list that stores annual daily temperature for cities
+    # annual_temp_city: pylab array that contains annual temperature for a given city & year
+    # avg_annual_temp: list that stores average temperature across cities for a given day
+    # std_dev: float that represents standard deviation for a given year
+    std_devs_list = []
+    for year in years:
+        annual_temp = []
+        for city in multi_cities:
+            annual_temp_city = climate.get_yearly_temp(city, year)
+            annual_temp.append(annual_temp_city)
+
+        avg_annual_temp = []
+        for i in range(len(annual_temp_city)):
+            daily_temp = 0
+            for j in range(len(annual_temp)):
+                daily_temp += annual_temp[j][i]
+            avg_annual_temp.append(daily_temp/len(annual_temp))
+
+        avg_annual_temp = pylab.array(avg_annual_temp)
+        mean_value = avg_annual_temp.mean()
+        std_dev = pylab.sqrt(((avg_annual_temp - mean_value)**2).sum()/len(avg_annual_temp))
+        std_devs_list.append(std_dev)
+
+    return pylab.array(std_devs_list)
+
+
+
+
 
 def evaluate_models_on_testing(x, y, models):
     """
@@ -377,64 +405,71 @@ def evaluate_models_on_testing(x, y, models):
 if __name__ == '__main__':
 
 
-    # Part A.4
-    # Part A.4.I
-#    climate = Climate('data.csv')
-#    data_samples = []
-#    # Traverse the training interval to get the daily temperature
-#    for i in TRAINING_INTERVAL:
-#        data_samples.append(climate.get_daily_temp('NEW YORK', 1, 10, i))
-#    pylab.array(data_samples)
-#    year = pylab.array(TRAINING_INTERVAL)
-#    models = generate_models(year, data_samples, [1])
-#    evaluate_models_on_training(year, data_samples, models)
+    ## Part A.4
+    ## Part A.4.I
+    # climate = Climate('data.csv')
+    # data_samples = []
+    ## Traverse the training interval to get the daily temperature
+    # for i in TRAINING_INTERVAL:
+    #     data_samples.append(climate.get_daily_temp('NEW YORK', 1, 10, i))
+    # pylab.array(data_samples)
+    # year = pylab.array(TRAINING_INTERVAL)
+    # models = generate_models(year, data_samples, [1])
+    # evaluate_models_on_training(year, data_samples, models)
 
-    # Part A.4.II
-#    climate = Climate('data.csv')
-#    data_samples = []
-#    # Traverse the training interval to get the average yearly temperature
-#    for i in TRAINING_INTERVAL:
-#        avg_temp = climate.get_yearly_temp('NEW YORK', i)
-#        data_samples.append(avg_temp.sum()/len(avg_temp))
-#    year = pylab.array(TRAINING_INTERVAL)
-#    models = generate_models(year, data_samples, [1])
-#    evaluate_models_on_training(year, data_samples, models)
+    ## Part A.4.II
+    # climate = Climate('data.csv')
+    # data_samples = []
+    ## Traverse the training interval to get the average yearly temperature
+    # for i in TRAINING_INTERVAL:
+    #     avg_temp = climate.get_yearly_temp('NEW YORK', i)
+    #     data_samples.append(avg_temp.sum()/len(avg_temp))
+    # year = pylab.array(TRAINING_INTERVAL)
+    # models = generate_models(year, data_samples, [1])
+    # evaluate_models_on_training(year, data_samples, models)
 
-    # Part B
-#    climate = Climate('data.csv')
-#    data_samples = []
-#    data_samples = gen_cities_avg(climate, CITIES, TRAINING_INTERVAL)
-#    year = pylab.array(TRAINING_INTERVAL)
-#    models = generate_models(year, data_samples, [1])
-#    evaluate_models_on_training(year, data_samples, models)
+    ## Part B
+    # climate = Climate('data.csv')
+    # data_samples = []
+    # data_samples = gen_cities_avg(climate, CITIES, TRAINING_INTERVAL)
+    # year = pylab.array(TRAINING_INTERVAL)
+    # models = generate_models(year, data_samples, [1])
+    # evaluate_models_on_training(year, data_samples, models)
 
 
-    # Part C
-#    climate = Climate('data.csv')
-#    data_samples = []
-#    window_length = 5
-#    data_samples = gen_cities_avg(climate, CITIES, TRAINING_INTERVAL)
-#    moving_avg = moving_average(data_samples, window_length)
-#    year = pylab.array(TRAINING_INTERVAL)
-#    models = generate_models(year, moving_avg, [1])
-#    evaluate_models_on_training(year, moving_avg, models)
+    ## Part C
+    # climate = Climate('data.csv')
+    # data_samples = []
+    # window_length = 5
+    # data_samples = gen_cities_avg(climate, CITIES, TRAINING_INTERVAL)
+    # moving_avg = moving_average(data_samples, window_length)
+    # year = pylab.array(TRAINING_INTERVAL)
+    # models = generate_models(year, moving_avg, [1])
+    # evaluate_models_on_training(year, moving_avg, models)
 
-    # Part D.2
+    ## Part D.2
+    # climate = Climate('data.csv')
+    # data_samples = []
+    # window_length = 5
+    # degrees = [1, 2, 20]
+    # data_samples = gen_cities_avg(climate, CITIES, TRAINING_INTERVAL)
+    # moving_avg = moving_average(data_samples, window_length)
+    # year = pylab.array(TRAINING_INTERVAL)
+    # models = generate_models(year, moving_avg, degrees)
+    ## evaluate_models_on_training(year, moving_avg, models) # Problem D.1
+    # test_samples = gen_cities_avg(climate, CITIES, TESTING_INTERVAL)
+    # test_moving_avg = moving_average(test_samples, window_length)
+    # test_year = pylab.array(TESTING_INTERVAL)
+    # evaluate_models_on_testing(test_year, test_moving_avg, models)
+
+
+    ## Part E
     climate = Climate('data.csv')
     data_samples = []
     window_length = 5
-    degrees = [1, 2, 20]
-    data_samples = gen_cities_avg(climate, CITIES, TRAINING_INTERVAL)
+    data_samples = gen_std_devs(climate, CITIES, TRAINING_INTERVAL)
     moving_avg = moving_average(data_samples, window_length)
     year = pylab.array(TRAINING_INTERVAL)
-    models = generate_models(year, moving_avg, degrees)
-    #evaluate_models_on_training(year, moving_avg, models)
-    test_samples = gen_cities_avg(climate, CITIES, TESTING_INTERVAL)
-    test_moving_avg = moving_average(test_samples, window_length)
-    test_year = pylab.array(TESTING_INTERVAL)
-    evaluate_models_on_testing(test_year, test_moving_avg, models)
+    models = generate_models(year, moving_avg, [1])
+    evaluate_models_on_training(year, moving_avg, models)
 
-
-    # Part E
-    # TODO: replace this line with your code
-    pass
