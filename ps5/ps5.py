@@ -313,8 +313,9 @@ def rmse(y, estimated):
     Returns:
         a float for the root mean square error term
     """
-    # TODO
-    pass
+    error = ((y - estimated)**2).sum()
+    rmse = pylab.sqrt(error/len(y))
+    return rmse
 
 def gen_std_devs(climate, multi_cities, years):
     """
@@ -358,8 +359,20 @@ def evaluate_models_on_testing(x, y, models):
     Returns:
         None
     """
-    # TODO
-    pass
+    for model in models:
+        pylab.figure()
+        pylab.plot(x, y, 'b.', label = "Testing data points")
+        pylab.xlabel('Years')
+        pylab.ylabel('Degree Celsius')
+        degree = len(model) - 1
+        estYVal = pylab.polyfit(model, x)
+        rmse = rmse(y, estYVal)
+        pylab.plot(x, estYVal, 'r-')
+        title = 'degree: ' + str(degree) + '\n' + \
+                'RMSE: ' + str(round(rmse, 4))
+        pylab.title(title)
+        pylab.show()
+
 
 if __name__ == '__main__':
 
@@ -397,17 +410,26 @@ if __name__ == '__main__':
 
 
     # Part C
+#    climate = Climate('data.csv')
+#    data_samples = []
+#    window_length = 5
+#    data_samples = gen_cities_avg(climate, CITIES, TRAINING_INTERVAL)
+#    moving_avg = moving_average(data_samples, window_length)
+#    year = pylab.array(TRAINING_INTERVAL)
+#    models = generate_models(year, moving_avg, [1])
+#    evaluate_models_on_training(year, moving_avg, models)
+
+    # Part D.2
     climate = Climate('data.csv')
     data_samples = []
     window_length = 5
+    degrees = [1, 2, 20]
     data_samples = gen_cities_avg(climate, CITIES, TRAINING_INTERVAL)
     moving_avg = moving_average(data_samples, window_length)
     year = pylab.array(TRAINING_INTERVAL)
-    models = generate_models(year, moving_avg, [1])
+    models = generate_models(year, moving_avg, degrees)
     evaluate_models_on_training(year, moving_avg, models)
 
-    # Part D.2
-    # TODO: replace this line with your code
 
     # Part E
     # TODO: replace this line with your code
