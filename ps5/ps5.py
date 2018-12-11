@@ -282,8 +282,23 @@ def moving_average(y, window_length):
         an 1-d pylab array with the same length as y storing moving average of
         y-coordinates of the N sample points
     """
-    # TODO
-    pass
+    # The test code for this function is defective,
+    # cause the type for parameter y in test code is list,
+    # not pylab as describled in specification.
+    y_moving = []
+    y = pylab.array(y)
+    for i in range(len(y)):
+        start = i - window_length + 1
+        # If we have less than window_length - 1 previous value,
+        # just add up the current values and divide them by their numbers.
+        if start < 0:
+            y_moving.append(y[:(i+1)].sum()/(i+1))
+        else:
+            y_moving.append(y[start:(i+1)].sum()/window_length)
+
+    return pylab.array(y_moving)
+
+
 
 def rmse(y, estimated):
     """
@@ -373,16 +388,23 @@ if __name__ == '__main__':
 #    evaluate_models_on_training(year, data_samples, models)
 
     # Part B
-    climate = Climate('data.csv')
-    data_samples = []
-    data_samples = gen_cities_avg(climate, CITIES, TRAINING_INTERVAL)
-    year = pylab.array(TRAINING_INTERVAL)
-    models = generate_models(year, data_samples, [1])
-    evaluate_models_on_training(year, data_samples, models)
+#    climate = Climate('data.csv')
+#    data_samples = []
+#    data_samples = gen_cities_avg(climate, CITIES, TRAINING_INTERVAL)
+#    year = pylab.array(TRAINING_INTERVAL)
+#    models = generate_models(year, data_samples, [1])
+#    evaluate_models_on_training(year, data_samples, models)
 
 
     # Part C
-    # TODO: replace this line with your code
+    climate = Climate('data.csv')
+    data_samples = []
+    window_length = 5
+    data_samples = gen_cities_avg(climate, CITIES, TRAINING_INTERVAL)
+    moving_avg = moving_average(data_samples, window_length)
+    year = pylab.array(TRAINING_INTERVAL)
+    models = generate_models(year, moving_avg, [1])
+    evaluate_models_on_training(year, moving_avg, models)
 
     # Part D.2
     # TODO: replace this line with your code
