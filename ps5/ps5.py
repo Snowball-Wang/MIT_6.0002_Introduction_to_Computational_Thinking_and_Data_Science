@@ -1,8 +1,11 @@
-# -*- coding: utf-8 -*-
-# Problem Set 5: Experimental Analysis
-# Name:
-# Collaborators (discussion):
-# Time:
+#!/usr/bin/env python3
+#*******************************************************
+#       Filename: ps5.py
+#       Author: Snowball Wang
+#       Mail: wjq1996@mail.ustc.edu.cn
+#       Description: Solution to Problem Set 5
+#       Created on: 2018-12-13 11:07:40
+#*******************************************************
 
 import pylab
 import re
